@@ -19,7 +19,6 @@ module.exports = appInfo => {
   config.middleware = [ 'auth' ];
 
   config.auth = {
-    // tslint:disable-next-line:array-bracket-spacing
     authUrlList: [ '/api/v1/captcha', '/api/v1/user/login', '/api/v1/file' ],
   };
   config.baseUrl = '/api/v1';
@@ -33,7 +32,7 @@ module.exports = appInfo => {
       host: 'localhost',
       port: '3306',
       user: 'root',
-      password: 'jianshuihen128',
+      password: 'root',
       database: 'egg_cms',
     },
     // 是否加载到 app 上，默认开启

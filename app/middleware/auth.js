@@ -6,7 +6,7 @@
  * @Company:
  * @Date: 2019-06-18 15:09:35
  * @LastEditors: 水痕
- * @LastEditTime: 2019-06-24 12:19:26
+ * @LastEditTime: 2019-06-24 13:48:06
  */
 'use strict';
 const { verify } = require('jsonwebtoken');
