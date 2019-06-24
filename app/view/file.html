@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <h1>上传文件</h1>
+    <form method="POST" action="http://127.0.0.1:7001/api/v1/file" enctype="multipart/form-data">
+      title: <input name="title" /> file: <input name="file" type="file" />
+      <button type="submit">Upload</button>
+    </form>
+    <hr />
+    <h1>ajax提交</h1>
+    <input type="text" id="username" />
+    <input name="file" type="file" id="file" />
+    <button id="btn">提交</button>
+  </body>
+  <script>
+    $('#btn').on('click', function() {
+      console.log('提交按钮');
+      let formData = new FormData();
+      formData.append('title', $('#username').val());
+      formData.append('image', $('#file')[0].files[0]);
+      console.log(formData);
+      $.ajax({
+        url: 'http://127.0.0.1:7001/api/v1/file',
+        data: formData,
+        method: 'post',
+        contentType: false,
+        processData: false,
+        success: function(result) {
+          console.log(result);
+        },
+      });
+    });
+  </script>
+</html>
