@@ -8,7 +8,7 @@ module.exports = () => {
       host: 'localhost',
       port: '3306',
       user: 'root',
-      password: 'jianshuihen128',
+      password: 'root',
       database: 'egg_cms',
     },
   };
