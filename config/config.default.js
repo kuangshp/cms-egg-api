@@ -16,8 +16,7 @@ module.exports = appInfo => {
   config.keys = appInfo.name + '_1561344901255_592';
 
   // 使用中间件
-  // config.middleware = [ 'auth' ];
-  config.middleware = [];
+  config.middleware = [ 'auth' ];
 
   config.auth = {
     // tslint:disable-next-line:array-bracket-spacing
