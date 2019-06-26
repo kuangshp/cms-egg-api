@@ -10,8 +10,12 @@ class RoleService extends BaseService {
   async getResource() {
     try {
       const { app } = this;
-      // 查询到资源表中全部的数据
-      const resources = await app.mysql.select('resource');
+      // 根据当前用户查询到资源表中对应的资源
+      const id = this.ctx.session.user.id;
+      const sql = `SELECT resource.* from user INNER JOIN role_user on user.id = role_user.user_id
+      INNER JOIN role on role_user.role_id=role.id INNER JOIN role_resource on role.id = role_resource.role_id
+      INNER JOIN resource on role_resource.resource_id = resource.id WHERE user.id = ?`;
+      const resources = await app.mysql.query(sql, [ id ]);
       /** ******************************格式化资源菜单生生成树结构 start********************************/
       const formatobj = resources.reduce((pre, cur) => {
         return { ...pre, [cur.id]: cur };
@@ -41,7 +45,6 @@ class RoleService extends BaseService {
     // 开启事物保护数据不要删除了,没添加进去
     const conn = await app.mysql.beginTransaction();
     try {
-      // tslint:disable-next-line:array-bracket-spacing
       await conn.query('delete from role_resource where role_id=?', [ roleId ]);
       if (resourceList.length) {
         for (const item of resourceList) {
@@ -72,7 +75,6 @@ class RoleService extends BaseService {
     const { app } = this;
     const conn = await app.mysql.beginTransaction();
     try {
-      // tslint:disable-next-line:array-bracket-spacing
       await conn.query('delete from role_user where role_id=?', [ roleId ]);
       for (const userId of userList) {
         await conn.insert('role_user', {

@@ -54,14 +54,14 @@ class UserController extends BaseController {
       const rule = {
         userName: { type: 'string', trim: true },
         password: { type: 'string', trim: true },
-        captcha: { type: 'string', trim: true },
+        // captcha: { type: 'string', trim: true },
       };
       ctx.validate(rule);
       // 对验证码校验
-      const { code, message } = await this.checkCaptcha();
-      if (code === 1) {
-        throw message;
-      }
+      // const { code, message } = await this.checkCaptcha();
+      // if (code === 1) {
+      //   throw message;
+      // }
       /** ******************************处理用户输入用户名、邮箱、手机号码 账号 start********************************/
       const { userName } = body;
       if (ctx.helper.isEmail.test(userName)) {
