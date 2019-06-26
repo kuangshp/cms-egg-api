@@ -37,9 +37,9 @@
 
 - 1、直接部署
 
-```shell
-npm run start
-```
+  ```shell
+  npm run start
+  ```
 
 - 2、停止项目
 
