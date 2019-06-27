@@ -60,7 +60,11 @@ class BaseController extends CoreController {
     const { ctx, service } = this;
     try {
       const { id } = ctx.params;
-      const result = await service[this.entity].destroy(id);
+      let ids = ctx.request.body;
+      if (!ids) {
+        ids = [ id ];
+      }
+      const result = await service[this.entity].destroy(ids);
       this.success(result);
     } catch (e) {
       ctx.logger.error(e);
